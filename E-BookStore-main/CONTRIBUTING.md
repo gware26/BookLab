@@ -1,6 +1,6 @@
-# Contributing to BookBoanerges
+# Contributing to BookLab
 
-Thank you for your interest in contributing to BookBoanerges! We welcome all contributions that help improve our bookstore platform.
+Thank you for your interest in contributing to BookLab! We welcome all contributions that help improve our bookstore platform.
 
 ## Code of Conduct
 
@@ -27,8 +27,8 @@ Thank you for your interest in contributing to BookBoanerges! We welcome all con
 
 2. Clone your fork locally
    ```bash
-   git clone https://github.com/yourusername/BookBoanerges.git
-   cd BookBoanerges
+   git clone https://github.com/yourusername/BookLab.git
+   cd BookLab
    ```
 
 3. Add upstream remote

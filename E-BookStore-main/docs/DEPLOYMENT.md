@@ -1,6 +1,6 @@
-# BookBoanerges Deployment Guide
+# BookLab Deployment Guide
 
-This guide covers all deployment options for BookBoanerges, from local development to production environments.
+This guide covers all deployment options for BookLab, from local development to production environments.
 
 ## Table of Contents
 
@@ -28,7 +28,7 @@ This guide covers all deployment options for BookBoanerges, from local developme
 #### Option 1: Python HTTP Server (Recommended)
 
 ```bash
-cd BookBoanerges
+cd BookLab
 python -m http.server 8000
 ```
 

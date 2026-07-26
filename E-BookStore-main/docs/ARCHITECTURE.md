@@ -1,4 +1,4 @@
-# BookBoanerges Architecture
+# BookLab Architecture
 
 ## Overview
 
@@ -7,7 +7,7 @@ BookBoanerges is a **static, client-side bookstore web application** built with 
 ## Project Structure
 
 ```
-BookBoanerges/
+BookLab/
 ├── src/                    # Source files
 │   ├── pages/             # HTML files
 │   │   ├── index.html     # Homepage (main entry)

@@ -1,9 +1,9 @@
-# BookBoanerges - Premium Online Bookstore
+# BookLab - Premium Online Bookstore
 
 > A modern, responsive, and feature-rich online bookstore platform with premium UI/UX design inspired by industry leaders like Apple, Stripe, and Barnes & Noble.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![GitHub](https://img.shields.io/badge/github-bookboanerges-lightgrey)
+![GitHub](https://img.shields.io/badge/github-booklab-lightgrey)
 ![Status](https://img.shields.io/badge/status-active-brightgreen.svg)
 
 ## 🌟 Features
@@ -33,7 +33,7 @@
 ## 📁 Project Structure
 
 ```
-BookBoanerges/
+BookLab/
 ├── src/                          # Source files
 │   ├── pages/                   # HTML pages
 │   │   ├── index.html          # Homepage
