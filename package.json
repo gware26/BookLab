@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/yourusername/BookLab/issues"
   },
-  "homepage": "https://github.com/yourusername/BookBoanerges#readme",
+  "homepage": "https://github.com/yourusername/BookLab#readme",
   "devDependencies": {
     "http-server": "^14.1.0"
   },

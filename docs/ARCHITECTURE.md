@@ -2,37 +2,18 @@
 
 ## Overview
 
-BookBoanerges is a **static, client-side bookstore web application** built with vanilla HTML, CSS, and JavaScript. The architecture prioritizes simplicity, performance, and maintainability.
+BookLab is a **static, client-side bookstore web application** built with vanilla HTML, CSS, and JavaScript. The architecture prioritizes simplicity, performance, and maintainability.
 
 ## Project Structure
 
 ```
 BookLab/
-├── src/                    # Source files
-│   ├── pages/             # HTML files
-│   │   ├── index.html     # Homepage (main entry)
-│   │   ├── login.html     # User login page
-│   │   ├── register.html  # User registration
-│   │   ├── member.html    # Member dashboard
-│   │   ├── Admin.html     # Admin dashboard
-│   │   └── Admin_log.html # Admin login
-│   ├── styles/            # CSS stylesheets
-│   │   ├── style.css      # Main styles (40KB) - Premium design system
-│   │   ├── loginReg.css   # Auth pages (7.7KB) - Form styling
-│   │   └── Admin.css      # Admin panel (15.5KB) - Admin styling
-│   └── scripts/           # JavaScript files
-│       ├── script.js      # Main (animations, interactivity)
-│       ├── admin.js       # Admin functionality
-│       └── session.js     # Session & auth management
-├── public/                # Deployment-ready assets
-│   ├── index.html        # Entry point (redirect)
-│   ├── images/           # Product & blog images (50+ files)
-│   ├── assets/
-│   │   └── vendor/       # Third-party libraries
-│   │       └── swiper/   # Swiper.js carousel library
-│   └── favicon.ico       # Site favicon
-├── games/                # Bonus mini-games
-│   └── guess-my-number/  # Number guessing game
+├── index.html            # Homepage (root)
+├── css/                  # Stylesheets (style.css, loginReg.css, Admin.css)
+├── js/                   # JavaScript files (script.js, admin.js, session.js)
+├── img/                  # Image and media assets
+├── vendor/               # Third-party libraries (swiper)
+├── games/                # Mini-games (guess-my-number)
 └── docs/                 # Documentation
 ```
 
@@ -526,16 +507,16 @@ Step 6: Optimize build process
 
 ### Adding a New Page
 
-1. Create HTML in `/src/pages/`
-2. Add CSS to `/src/styles/` or append to style.css
-3. Add JavaScript to `/src/scripts/` if needed
+1. Create HTML files at the project root (e.g., `index.html`, `login.html`)
+2. Add CSS to the `css/` directory (e.g., `css/style.css`)
+3. Add JavaScript to the `js/` directory (e.g., `js/script.js`) if needed
 4. Link in navigation
 5. Test responsive design
 6. Commit and push
 
 ### Updating Styles
 
-1. Edit CSS in `/src/styles/`
+1. Edit CSS in `css/`
 2. Test on mobile/tablet/desktop
 3. Verify animations work smoothly
 4. Check performance (no layout thrashing)
@@ -552,4 +533,4 @@ Step 6: Optimize build process
 
 ---
 
-**Last Updated**: July 2026 | **Version**: 2.0 (Premium Redesign) | **Maintained By**: BookBoanerges Contributors
+**Last Updated**: July 2026 | **Version**: 2.0 (Premium Redesign) | **Maintained By**: BookLab Contributors

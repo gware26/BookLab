@@ -21,7 +21,7 @@ Thank you for your interest in contributing to BookLab! We welcome all contribut
 
 1. Fork the repository on GitHub
    ```bash
-   # Go to https://github.com/yourusername/BookBoanerges
+  # Go to https://github.com/yourusername/BookLab
    # Click "Fork" button
    ```
 
@@ -33,7 +33,7 @@ Thank you for your interest in contributing to BookLab! We welcome all contribut
 
 3. Add upstream remote
    ```bash
-   git remote add upstream https://github.com/original/BookBoanerges.git
+  git remote add upstream https://github.com/original/BookLab.git
    ```
 
 ## Development Workflow
@@ -235,7 +235,7 @@ Before submitting a PR, test on:
    ```
 
 2. **Create PR on GitHub**
-   - Go to https://github.com/yourusername/BookBoanerges
+  - Go to https://github.com/yourusername/BookLab
    - Click "Compare & pull request"
    - Fill in the PR template
 
@@ -360,14 +360,12 @@ Any other details?
 ## Project Structure
 
 ```
-BookBoanerges/
-├── src/
-│   ├── pages/          # HTML files
-│   ├── styles/         # CSS files
-│   └── scripts/        # JavaScript files
-├── public/             # Static assets
-│   ├── images/         # Images
-│   └── assets/         # Vendor libraries
+BookLab/
+├── index.html          # HTML files at project root
+├── css/                # CSS files
+├── js/                 # JavaScript files
+├── img/                # Images
+├── vendor/             # Vendor libraries
 ├── games/              # Mini-games
 ├── docs/               # Documentation
 └── README.md           # Main documentation
@@ -395,7 +393,7 @@ BookBoanerges/
 - Check the [README.md](README.md)
 - Review [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - Open a GitHub Discussion
-- Email: support@bookboanerges.com
+- Email: support@booklab.com
 
 ## Recognition
 

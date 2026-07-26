@@ -32,7 +32,7 @@ cd BookLab
 python -m http.server 8000
 ```
 
-Then open: `http://localhost:8000/src/pages/index.html`
+Then open: `http://localhost:8000/index.html`
 
 #### Option 2: Node.js HTTP Server
 
@@ -47,7 +47,7 @@ http-server -p 8000
 #### Option 3: PHP Built-in Server
 
 ```bash
-cd BookBoanerges
+cd BookLab
 php -S localhost:8000
 ```
 
@@ -63,10 +63,10 @@ php -S localhost:8000
 After starting local server:
 
 ```
-Home: http://localhost:8000/src/pages/index.html
-Login: http://localhost:8000/src/pages/login.html
-Register: http://localhost:8000/src/pages/register.html
-Admin: http://localhost:8000/src/pages/Admin.html
+Home: http://localhost:8000/index.html
+Login: http://localhost:8000/login.html
+Register: http://localhost:8000/register.html
+Admin: http://localhost:8000/Admin.html
 ```
 
 ### Browser DevTools Testing
@@ -100,10 +100,10 @@ git init
 git add .
 
 # Commit
-git commit -m "Initial commit: BookBoanerges premium bookstore"
+git commit -m "Initial commit: BookLab premium bookstore"
 
 # Add remote repository
-git remote add origin https://github.com/yourusername/BookBoanerges.git
+git remote add origin https://github.com/yourusername/BookLab.git
 
 # Push to GitHub
 git branch -M main
@@ -123,7 +123,7 @@ git push -u origin main
 
 Your site will be available at:
 ```
-https://yourusername.github.io/BookBoanerges
+https://yourusername.github.io/BookLab
 ```
 
 GitHub will show this URL in the Pages settings.
@@ -168,7 +168,7 @@ GitHub will show this URL in the Pages settings.
 1. Click **New site from Git**
 2. Choose **GitHub**
 3. Authorize Netlify to access your GitHub
-4. Select your BookBoanerges repository
+4. Select your BookLab repository
 5. Configure build settings:
    - Build command: Leave empty (static site)
    - Publish directory: `public`
@@ -213,7 +213,7 @@ Create `netlify.toml` in project root:
   status = 200
 
 [context.production]
-  environment = { SITE_NAME = "BookBoanerges" }
+  environment = { SITE_NAME = "BookLab" }
 
 [[headers]]
   for = "/*"
@@ -236,7 +236,7 @@ Create `netlify.toml` in project root:
 
 1. Click **New Project**
 2. Import from GitHub
-3. Select BookBoanerges repository
+3. Select BookLab repository
 4. Configure:
    - Framework: None (static)
    - Root Directory: ./
@@ -323,14 +323,14 @@ Visit `https://yourdomain.com` and verify the site loads correctly.
 
 ```bash
 # Using AWS CLI
-aws s3 mb s3://bookboanerges-bucket --region us-east-1
+aws s3 mb s3://booklab-bucket --region us-east-1
 ```
 
 #### Step 2: Upload Files
 
 ```bash
 # Sync public folder to S3
-aws s3 sync ./public s3://bookboanerges-bucket --delete
+aws s3 sync ./public s3://booklab-bucket --delete
 ```
 
 #### Step 3: Enable Static Website Hosting
@@ -403,10 +403,10 @@ server {
 
 ```bash
 # Build image
-docker build -t bookboanerges .
+docker build -t booklab .
 
 # Run container
-docker run -p 8080:80 bookboanerges
+docker run -p 8080:80 booklab
 
 # Access at http://localhost:8080
 ```
@@ -415,16 +415,16 @@ docker run -p 8080:80 bookboanerges
 
 ```bash
 # Tag image
-docker tag bookboanerges yourusername/bookboanerges:latest
+docker tag booklab yourusername/booklab:latest
 
 # Login to Docker Hub
 docker login
 
 # Push
-docker push yourusername/bookboanerges:latest
+docker push yourusername/booklab:latest
 
 # Pull and run anywhere
-docker run -p 80:80 yourusername/bookboanerges:latest
+docker run -p 80:80 yourusername/booklab:latest
 ```
 
 ---
@@ -437,11 +437,11 @@ docker run -p 80:80 yourusername/bookboanerges:latest
 
 ```bash
 # Minify CSS
-cat src/styles/style.css | sed 's/\/\*.*\*\///g' | sed 's/  //g' > public/style.min.css
+cat css/style.css | sed 's/\/\*.*\*\///g' | sed 's/  //g' > public/style.min.css
 
 # Minify JavaScript
 npm install -g terser
-terser src/scripts/script.js -o public/script.min.js
+terser js/script.js -o public/script.min.js
 ```
 
 #### 2. Optimize Images
@@ -474,12 +474,12 @@ Update HTML:
 Create `public/sw.js`:
 
 ```javascript
-const CACHE_NAME = 'bookboanerges-v1';
+const CACHE_NAME = 'booklab-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/src/styles/style.css',
-  '/src/scripts/script.js',
+  '/css/style.css',
+  '/js/script.js',
 ];
 
 self.addEventListener('install', event => {
@@ -575,7 +575,7 @@ Apache (.htaccess):
 <script src="src/scripts/script.js"></script>
 
 <!-- Update if deploying in subdirectory -->
-<link rel="stylesheet" href="/BookBoanerges/src/styles/style.css">
+<link rel="stylesheet" href="/css/style.css">
 ```
 
 ### Issue: Images Not Displaying
