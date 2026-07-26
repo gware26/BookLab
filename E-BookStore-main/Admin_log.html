@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .login-card {
+        background: #fff;
+        padding: 40px 30px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        width: 320px;
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .login-card:hover {
+        transform: scale(1.03);
+      }
+
+      .login-card h2 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .login-card input {
+        width: 100%;
+        padding: 12px;
+        margin: 12px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        transition: 0.3s;
+      }
+
+      .login-card input:focus {
+        border-color: #764ba2;
+        outline: none;
+        box-shadow: 0 0 5px rgba(118, 75, 162, 0.5);
+      }
+
+      .login-card button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        background: #764ba2;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .login-card button:hover {
+        background: #5a358f;
+      }
+
+      .alert {
+        display: none;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: red;
+      }
+
+      .demo-hint {
+        font-size: 13px;
+        color: #555;
+        margin-top: 10px;
+        background: #f0f0f0;
+        padding: 8px;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-card">
+      <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+      <div class="alert" id="alert"></div>
+
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button onclick="login()">Login</button>
+
+      <div class="demo-hint">
+        Demo Credentials:<br />
+        Username: <strong>boa</strong><br />
+        Password: <strong>boa2622</strong>
+      </div>
+    </div>
+
+    <script>
+      const ADMIN = {
+        username: "boa",
+        password: "boa2622",
+      };
+
+      function login() {
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const alertDiv = document.getElementById("alert");
+
+        if (username === ADMIN.username && password === ADMIN.password) {
+          // Redirect to Admin page
+          window.location.href = "./Admin.html";
+        } else {
+          alertDiv.textContent = "Invalid username or password";
+          alertDiv.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>

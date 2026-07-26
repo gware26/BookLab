@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookstore Admin Panel</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="./css/Admin.css" />
+  </head>
+  <script src="./js/session.js" defer></script>
+
+  <body>
+    <ul>  <li>
+              <a href="./Admin_log.html" style="color: var(--danger)">
+                <i class="fas fa-store"></i> logout
+              </a>
+            </li></ul>
+    <!-- <script>
+      function logout() {
+        localStorage.clear(); // remove login session
+        window.location.href = "./Admin_log.html"; // back to login
+      }
+    </script> -->
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+      <h1><i class="fas fa-book"></i> Bookstore Admin Panel</h1>
+      <div class="d-flex align-center gap-1">
+        <div class="admin-user">
+          <img
+            src="https://ui-avatars.com/api/?name=Admin+User&background=3498db&color=fff&size=128"
+            alt="Admin"
+          />
+          <div>
+            <strong>Admin</strong>
+            <small style="display: block; opacity: 0.8">Administrator</small>
+          </div>
+        </div>
+        <button class="btn-logout">
+          <a href="./Admin_log.html">Logout</a>
+        </button>
+      </div>
+    </header>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+      <!-- Sidebar -->
+      <nav class="admin-sidebar">
+        <div class="admin-nav">
+          <ul>
+            <li>
+              <a
+                href="#dashboard"
+                class="active"
+                onclick="showPage('dashboard')"
+              >
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+              </a>
+            </li>
+            <li>
+              <a href="#books" onclick="showPage('books')">
+                <i class="fas fa-book"></i> Books
+              </a>
+            </li>
+            <li>
+              <a href="#orders" onclick="showPage('orders')">
+                <i class="fas fa-shopping-cart"></i> Orders
+              </a>
+            </li>
+            <li>
+              <a href="#users" onclick="showPage('users')">
+                <i class="fas fa-users"></i> Users
+              </a>
+            </li>
+            <li>
+              <a href="#reviews" onclick="showPage('reviews')">
+                <i class="fas fa-star"></i> Reviews
+              </a>
+            </li>
+            <li>
+              <a href="#settings" onclick="showPage('settings')">
+                <i class="fas fa-cog"></i> Settings
+              </a>
+            </li>
+            <li>
+              <a href="./index.html" style="color: var(--danger)">
+                <i class="fas fa-store"></i> Back to Store
+              </a>
+            </li>
+          </ul>
+          <div class="language-selector">
+            <select id="languageSelect" onchange="changeLanguage(this.value)">
+              <option value="en">English</option>
+              <option value="am">አማርኛ (Amharic)</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="admin-main" id="mainContent">
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page active">
+          <div class="page-title">
+            <h1 id="dashboardTitle">Dashboard Overview</h1>
+            <p id="dashboardDesc">
+              Welcome back! Here's what's happening with your bookstore today.
+            </p>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="stats-container">
+            <div class="stat-card">
+              <div class="stat-icon blue">
+                <i class="fas fa-book"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalBooks">0</h3>
+                <p id="totalBooksLabel">Total Books</p>
+                <div class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span id="booksChange">0%</span>
+                  <span id="fromLastMonth">from last month</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon green">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalOrders">0</h3>
+                <p id="totalOrdersLabel">Total Orders</p>
+                <div class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span id="ordersChange">0%</span>
+                  <span id="fromLastWeek">from last week</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon orange">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalUsers">0</h3>
+                <p id="totalUsersLabel">Registered Users</p>
+                <div class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span id="usersChange">0</span>
+                  <span id="newToday">new today</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon red">
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalRevenue">0 ብር</h3>
+                <p id="totalRevenueLabel">Total Revenue</p>
+                <div class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span id="revenueChange">0%</span>
+                  <span id="fromLastMonthRev">from last month</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Orders -->
+          <div class="table-container">
+            <div class="table-header">
+              <h2 id="recentOrdersTitle">Recent Orders</h2>
+              <div class="d-flex align-center gap-1">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="searchOrders"
+                    placeholder="Search orders..."
+                    onkeyup="searchTable('ordersTable', this.value)"
+                  />
+                </div>
+                <button class="btn btn-primary" onclick="showPage('orders')">
+                  <i class="fas fa-eye"></i>
+                  <span id="viewAllOrders">View All Orders</span>
+                </button>
+              </div>
+            </div>
+
+            <table id="ordersTable">
+              <thead>
+                <tr>
+                  <th id="orderIdCol">Order ID</th>
+                  <th id="customerCol">Customer</th>
+                  <th id="booksCol">Books</th>
+                  <th id="amountCol">Amount</th>
+                  <th id="statusCol">Status</th>
+                  <th id="dateCol">Date</th>
+                  <th id="actionsCol">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersBody">
+                <!-- Orders loaded by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Recent Books -->
+          <div class="table-container">
+            <div class="table-header">
+              <h2 id="recentBooksTitle">Recent Books Added</h2>
+              <button class="btn btn-primary" onclick="showAddBookModal()">
+                <i class="fas fa-plus"></i>
+                <span id="addNewBookBtn">Add New Book</span>
+              </button>
+            </div>
+
+            <table id="recentBooksTable">
+              <thead>
+                <tr>
+                  <th id="idCol">ID</th>
+                  <th id="titleCol">Title</th>
+                  <th id="authorCol">Author</th>
+                  <th id="priceCol">Price</th>
+                  <th id="stockCol">Stock</th>
+                  <th id="statusCol2">Status</th>
+                  <th id="actionsCol2">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="recentBooksBody">
+                <!-- Books loaded by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Books Management Page -->
+        <div id="books" class="page" style="display: none">
+          <div class="page-title">
+            <h1 id="booksMgmtTitle">Books Management</h1>
+            <p id="booksMgmtDesc">
+              Manage your bookstore inventory, add new books, and update
+              existing ones.
+            </p>
+          </div>
+
+          <div class="table-container">
+            <div class="table-header">
+              <div class="d-flex align-center gap-1">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="searchBooks"
+                    placeholder="Search books..."
+                    onkeyup="searchTable('booksTable', this.value)"
+                  />
+                </div>
+                <select
+                  class="form-control"
+                  style="max-width: 200px"
+                  id="categoryFilter"
+                  onchange="filterByCategory()"
+                >
+                  <option value="">All Categories</option>
+                  <option value="Fiction">Fiction Amharic</option>
+                  <option value="Non-Fiction">Non-Fiction Amharic</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Science">Science</option>
+                  <option value="Biography">Biography</option>
+                </select>
+              </div>
+              <button class="btn btn-success" onclick="showAddBookModal()">
+                <i class="fas fa-plus"></i>
+                <span id="addNewBookBtn2">Add New Book</span>
+              </button>
+            </div>
+
+            <table id="booksTable">
+              <thead>
+                <tr>
+                  <th id="idCol2">ID</th>
+                  <th id="coverCol">Cover</th>
+                  <th id="titleCol2">Title</th>
+                  <th id="authorCol2">Author</th>
+                  <th id="categoryCol">Category</th>
+                  <th id="priceCol2">Price</th>
+                  <th id="stockCol2">Stock</th>
+                  <th id="statusCol3">Status</th>
+                  <th id="actionsCol3">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="booksBody">
+                <!-- Books loaded by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Orders Management Page -->
+        <div id="orders" class="page" style="display: none">
+          <div class="page-title">
+            <h1 id="ordersMgmtTitle">Orders Management</h1>
+            <p id="ordersMgmtDesc">
+              View and manage customer orders, update status, and process
+              refunds.
+            </p>
+          </div>
+
+          <div class="table-container">
+            <div class="table-header">
+              <h2 id="allOrdersTitle">All Orders</h2>
+              <div class="d-flex align-center gap-1">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="searchAllOrders"
+                    placeholder="Search orders..."
+                    onkeyup="searchTable('allOrdersTable', this.value)"
+                  />
+                </div>
+                <select
+                  class="form-control"
+                  style="max-width: 200px"
+                  id="statusFilter"
+                  onchange="filterByStatus()"
+                >
+                  <option value="">All Status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Processing">Processing</option>
+                  <option value="Shipped">Shipped</option>
+                  <option value="Delivered">Delivered</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+
+            <table id="allOrdersTable">
+              <thead>
+                <tr>
+                  <th id="orderIdCol2">Order ID</th>
+                  <th id="customerCol2">Customer</th>
+                  <th id="booksCol2">Books</th>
+                  <th id="amountCol2">Amount</th>
+                  <th id="statusCol4">Status</th>
+                  <th id="dateCol2">Date</th>
+                  <th id="actionsCol4">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="allOrdersBody">
+                <!-- Orders loaded by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Users Management Page -->
+        <div id="users" class="page" style="display: none">
+          <div class="page-title">
+            <h1 id="usersMgmtTitle">Users Management</h1>
+            <p id="usersMgmtDesc">
+              Manage registered users, view details, and manage roles.
+            </p>
+          </div>
+
+          <div class="table-container">
+            <div class="table-header">
+              <h2 id="allUsersTitle">All Users</h2>
+              <div class="d-flex align-center gap-1">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="searchUsers"
+                    placeholder="Search users..."
+                    onkeyup="searchTable('usersTable', this.value)"
+                  />
+                </div>
+                <select
+                  class="form-control"
+                  style="max-width: 200px"
+                  id="roleFilter"
+                  onchange="filterByRole()"
+                >
+                  <option value="">All Roles</option>
+                  <option value="Customer">Customer</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Moderator">Moderator</option>
+                </select>
+              </div>
+            </div>
+
+            <table id="usersTable">
+              <thead>
+                <tr>
+                  <th id="userIdCol">ID</th>
+                  <th id="userNameCol">Name</th>
+                  <th id="userEmailCol">Email</th>
+                  <th id="userRoleCol">Role</th>
+                  <th id="userJoinDateCol">Join Date</th>
+                  <th id="userStatusCol">Status</th>
+                  <th id="userActionsCol">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersBody">
+                <!-- Users loaded by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Reviews Management Page -->
+        <div id="reviews" class="page" style="display: none">
+          <div class="page-title">
+            <h1 id="reviewsMgmtTitle">Reviews Management</h1>
+            <p id="reviewsMgmtDesc">
+              Manage book reviews, approve or delete user reviews.
+            </p>
+          </div>
+
+          <div class="table-container">
+            <div class="table-header">
+              <h2 id="allReviewsTitle">All Reviews</h2>
+              <div class="d-flex align-center gap-1">
+                <div class="search-box">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="searchReviews"
+                    placeholder="Search reviews..."
+                    onkeyup="searchTable('reviewsTable', this.value)"
+                  />
+                </div>
+                <select
+                  class="form-control"
+                  style="max-width: 200px"
+                  id="reviewStatusFilter"
+                  onchange="filterByReviewStatus()"
+                >
+                  <option value="">All Status</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+                <select
+                  class="form-control"
+                  style="max-width: 200px"
+                  id="ratingFilter"
+                  onchange="filterByRating()"
+                >
+                  <option value="">All Ratings</option>
+                  <option value="5">5 Stars</option>
+                  <option value="4">4 Stars</option>
+                  <option value="3">3 Stars</option>
+                  <option value="2">2 Stars</option>
+                  <option value="1">1 Star</option>
+                </select>
+              </div>
+            </div>
+
+            <table id="reviewsTable">
+              <thead>
+                <tr>
+                  <th id="reviewIdCol">ID</th>
+                  <th id="reviewBookCol">Book</th>
+                  <th id="reviewUserCol">User</th>
+                  <th id="reviewRatingCol">Rating</th>
+                  <th id="reviewCommentCol">Comment</th>
+                  <th id="reviewDateCol">Date</th>
+                  <th id="reviewStatusCol2">Status</th>
+                  <th id="reviewActionsCol">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reviewsBody">
+                <!-- Reviews loaded by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div id="settings" class="page" style="display: none">
+          <div class="page-title">
+            <h1 id="settingsTitle">Settings</h1>
+            <p id="settingsDesc">
+              Configure your bookstore settings and preferences.
+            </p>
+          </div>
+
+          <div class="form-container">
+            <h3
+              style="margin-bottom: 1.5rem; color: var(--primary)"
+              id="generalSettingsTitle"
+            >
+              General Settings
+            </h3>
+
+            <div class="form-group">
+              <label for="storeName" id="storeNameLabel">Store Name</label>
+              <input
+                type="text"
+                id="storeName"
+                class="form-control"
+                value="Ethiopian Bookstore"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="storeEmail" id="storeEmailLabel">Store Email</label>
+              <input
+                type="email"
+                id="storeEmail"
+                class="form-control"
+                value="contact@ethiopianbooks.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="currency" id="currencyLabel">Currency</label>
+              <select id="currency" class="form-control">
+                <option value="BIRR">Ethiopian Birr (ብር)</option>
+                <option value="USD">US Dollar ($)</option>
+                <option value="EUR">Euro (€)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="timezone" id="timezoneLabel">Timezone</label>
+              <select id="timezone" class="form-control">
+                <option value="Africa/Addis_Ababa">Addis Ababa (EAT)</option>
+                <option value="UTC-5">EST</option>
+                <option value="UTC-8">PST</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="defaultLanguage" id="languageLabel"
+                >Default Language</label
+              >
+              <select id="defaultLanguage" class="form-control">
+                <option value="am">አማርኛ (Amharic)</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary mt-2" onclick="saveSettings()">
+              <i class="fas fa-save"></i>
+              <span id="saveSettingsBtn">Save Settings</span>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add Book Modal -->
+    <div id="addBookModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="addBookTitle">Add New Book</h3>
+          <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="bookForm" onsubmit="addBook(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookTitle" id="bookTitleLabel">Book Title *</label>
+              <input type="text" id="bookTitle" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="bookAuthor" id="bookAuthorLabel">Author *</label>
+              <input
+                type="text"
+                id="bookAuthor"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookPrice" id="bookPriceLabel">Price (ብር) *</label>
+              <input
+                type="number"
+                id="bookPrice"
+                class="form-control"
+                step="0.01"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="bookStock" id="bookStockLabel"
+                >Stock Quantity *</label
+              >
+              <input
+                type="number"
+                id="bookStock"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookCategory" id="bookCategoryLabel">Category</label>
+              <select id="bookCategory" class="form-control">
+                <option value="Fiction">Fiction Amharic</option>
+                <option value="Non-Fiction">Non-Fiction Amharic</option>
+                <option value="Technology">Technology</option>
+                <option value="Science">Science</option>
+                <option value="Biography">Biography</option>
+                <option value="History">History</option>
+                <option value="Religion">Religion</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bookLanguage" id="bookLanguageLabel">Language</label>
+              <select id="bookLanguage" class="form-control">
+                <option value="am">አማርኛ (Amharic)</option>
+                <option value="en">English</option>
+                <option value="om">Oromiffa</option>
+                <option value="ti">Tigrinya</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bookDescription" id="bookDescLabel">Description</label>
+            <textarea
+              id="bookDescription"
+              class="form-control"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <div class="d-flex gap-1 mt-2">
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-save"></i>
+              <span id="saveBookBtn">Save Book</span>
+            </button>
+            <button type="button" class="btn btn-danger" onclick="closeModal()">
+              <i class="fas fa-times"></i> <span id="cancelBtn">Cancel</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="./js/admin.js"></script>
+  </body>
+</html>
